@@ -17,18 +17,19 @@ main = do
     let n = read n_temp :: Int
     a_temp <- getLine
     let a = map read $ words a_temp :: [Int]
-    --     cross = do
-    --       i <- a
-    --       j <- delete i a
-    --       pure (i, j) -- slow list ++
-    --     cross' = sortOn (\(i, j) -> abs (i - j)) cross
-    -- putStrLn $ show $ (\(i, j) -> abs (i - j)) (head cross')
-        a' = sort a
-        b = (maxBound :: Int) : a'
-        ab = zip a' b
-        diffs = fmap (\(i, j) -> abs (i - j)) ab
-    putStrLn $ show $ minimum diffs
-    
+        
+    putStrLn $ show $ maxdiff a
+
+maxdiff :: [Int] -> Int
+maxdiff arr = let
+  (lowest, highest) = foldl foldF (maxBound::Int, minBound::Int) arr
+  in abs (highest-lowest)
+
+foldF :: (Int, Int) -> Int -> (Int, Int)
+foldF (lowest, highest) x
+  | x < lowest = (x, highest)
+  | x > highest = (lowest, x)
+  | otherwise = (lowest, highest)
 
 getMultipleLines :: Int -> IO [String]
 getMultipleLines n
