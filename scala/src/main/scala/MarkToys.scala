@@ -1,6 +1,6 @@
-object Solution {
-  def main(args: Array[String]) = MarkToys.main(args)
-}
+// object Solution {
+//   def main(args: Array[String]) = MarkToys.main(args)
+// }
 
 object MarkToys {
 
